@@ -8,7 +8,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect('mongodb://127.0.0.1:27017/notes-app');
+const mongoDB = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/notes-app';
+
+mongoose.connect(mongoDB);
 mongoose.connection.on('error', (error) => console.error(error));
 mongoose.connection.once('open', () => console.log('Connected to MongoDB'));
 
