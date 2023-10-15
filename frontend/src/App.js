@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const api = axios.create({
-    baseURL: 'http://localhost:3001',
+    baseURL: process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001',
 });
 
 const App = () => {
