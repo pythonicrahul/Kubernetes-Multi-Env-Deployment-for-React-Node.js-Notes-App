@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: pythonicrahul/basic-notes-app-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - notenet
+    environment:
+      - REACT_APP_API_BASE_URL=http://localhost:3001
+
+  backend:
+    image: pythonicrahul/basic-notes-app-backend
+    ports:
+      - "3001:3001"
+    networks:
+      - notenet
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/notesdb
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27020:27017"
+    networks:
+      - notenet
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:
+
+networks:
+  notenet:

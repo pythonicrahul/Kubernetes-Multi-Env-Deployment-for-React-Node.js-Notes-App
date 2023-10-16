@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# Rebuild bcrypt to be compatible with your Node.js version
+RUN npm rebuild bcrypt
+
 # Install app dependencies
 RUN npm install
 
@@ -17,4 +20,4 @@ COPY . .
 EXPOSE 3001
 
 # Start the backend application
-CMD ["npm", "start"]
+CMD ["node", "main.js"]
