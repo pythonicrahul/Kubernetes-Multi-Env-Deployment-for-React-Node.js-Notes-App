@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 const mongoDB = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/notes-app';
+const port = process.env.PORT || 3001;
 
 mongoose.connect(mongoDB);
 mongoose.connection.on('error', (error) => console.error(error));
@@ -48,7 +49,7 @@ const verifyToken = (req, res, next) => {
 };
 
 // User registration route
-app.post('/signup', async (req, res) => {
+app.post('/api/v1/signup', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
         return res.status(400).json({ error: 'Username and password are required' });
@@ -67,7 +68,7 @@ app.post('/signup', async (req, res) => {
 });
 
 // User login route
-app.post('/login', async (req, res) => {
+app.post('/api/v1/login', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
         return res.status(400).json({ error: 'Username and password are required' });
@@ -90,7 +91,7 @@ app.post('/login', async (req, res) => {
 });
 
 // Create a note (requires authentication)
-app.post('/notes', verifyToken, async (req, res) => {
+app.post('/api/v1/notes', verifyToken, async (req, res) => {
     const { title, author, text } = req.body;
     if (!title || !author || !text) {
         return res.status(400).json({ error: 'Title, author, and text are required' });
@@ -107,7 +108,7 @@ app.post('/notes', verifyToken, async (req, res) => {
 });
 
 // Retrieve notes (requires authentication)
-app.get('/notes', verifyToken, async (req, res) => {
+app.get('/api/v1/notes', verifyToken, async (req, res) => {
     try {
         const notes = await Note.find({ userId: req.user._id });
         res.json(notes);
@@ -117,7 +118,7 @@ app.get('/notes', verifyToken, async (req, res) => {
 });
 
 // Delete a note (requires authentication)
-app.delete('/notes/:id', verifyToken, async (req, res) => {
+app.delete('/api/v1/notes/:id', verifyToken, async (req, res) => {
     const id = req.params.id;
 
     try {
@@ -133,7 +134,7 @@ app.delete('/notes/:id', verifyToken, async (req, res) => {
     }
 });
 
-const port = 3001;
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
