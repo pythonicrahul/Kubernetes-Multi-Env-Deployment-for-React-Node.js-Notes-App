@@ -21,4 +21,5 @@ spec:
           value: http://172-105-45-221.ip.linodeusercontent.com/api/v1
         ports:
         - containerPort: 3000
+        imagePullPolicy: Always
       restartPolicy: Always

@@ -21,4 +21,5 @@ spec:
           value: mongodb://mongodb.default.svc.cluster.local:27017
         ports:
         - containerPort: 3001
+        imagePullPolicy: Always
       restartPolicy: Always
