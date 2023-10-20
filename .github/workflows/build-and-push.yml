@@ -1,4 +1,4 @@
-name: Publish Docker Images
+name: Build and Deploy to Kubernetes
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,22 @@ jobs:
       run: |
         docker build -t ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:latest .
         docker push ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up kubectl
+      run: echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+
+    - name: Deploy to Kubernetes
+      run: kubectl apply -f k8s/
+      env:
+        KUBECONFIG: ./kubeconfig.yaml
+
+    - name: Clean up
+      run: |
+        rm kubeconfig.yaml
