@@ -39,8 +39,13 @@ jobs:
     - name: Set up kubectl
       run: echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
 
-    - name: Deploy to Kubernetes
-      run: kubectl apply -f k8s/
+    - name: Trigger Rolling Restart of Backend Deployment
+      run: kubectl rollout restart deployment backend
+      env:
+        KUBECONFIG: ./kubeconfig.yaml
+
+    - name: Trigger Rolling Restart of Frontend Deployment
+      run: kubectl rollout restart deployment frontend
       env:
         KUBECONFIG: ./kubeconfig.yaml
 
