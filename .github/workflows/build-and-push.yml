@@ -50,5 +50,4 @@ jobs:
         KUBECONFIG: ./kubeconfig.yaml
 
     - name: Clean up
-      run: |
-        rm kubeconfig.yaml
+      run: rm kubeconfig.yaml

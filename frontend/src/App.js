@@ -130,7 +130,7 @@ const App = () => {
     return (
         <div>
             <Navbar bg="dark" variant="dark">
-                <Navbar.Brand className="px-2" href="/">Notes</Navbar.Brand>
+                <Navbar.Brand className="px-2" href="/">Your Notes</Navbar.Brand>
                 {user ? (
                     <Nav className="ml-auto">
                         <Nav.Item>
