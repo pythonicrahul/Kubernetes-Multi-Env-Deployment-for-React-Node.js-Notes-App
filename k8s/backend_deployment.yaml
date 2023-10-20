@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: pythonicrahul/basic-notes-app-backend
+        image: pythonicrahul/basic-notes-app-backend:latest
         env:
         - name: MONGO_URI
           value: mongodb://mongodb.default.svc.cluster.local:27017

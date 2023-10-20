@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: pythonicrahul/basic-notes-app-frontend
+        image: pythonicrahul/basic-notes-app-frontend:latest
         env:
         - name: REACT_APP_API_BASE_URL
           value: http://172-105-45-221.ip.linodeusercontent.com/api/v1
