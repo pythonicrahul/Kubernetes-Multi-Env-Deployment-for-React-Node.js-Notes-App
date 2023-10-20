@@ -29,6 +29,7 @@ jobs:
         docker push ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:latest
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +40,7 @@ jobs:
       run: echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
 
     - name: Deploy to Kubernetes
-      run: kubectl apply -f k8s/
+      run: kubectl apply -f deploy/
       env:
         KUBECONFIG: ./kubeconfig.yaml
 
