@@ -40,7 +40,7 @@ jobs:
       run: echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
 
     - name: Deploy to Kubernetes
-      run: kubectl apply -f deploy/
+      run: kubectl apply -f k8s/
       env:
         KUBECONFIG: ./kubeconfig.yaml
 
