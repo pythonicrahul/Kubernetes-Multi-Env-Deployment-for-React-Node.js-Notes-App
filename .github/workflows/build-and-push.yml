@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - dev
+      # Add other branches as needed
 
 jobs:
   build:
@@ -41,8 +43,9 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: | 
-        kubectl apply -f k8s/main/backend
-        kubectl apply -f k8s/main/frontend
+        branch_folder="k8s/${{ github.ref }}"
+        kubectl apply -f $branch_folder/backend
+        kubectl apply -f $branch_folder/frontend
       env:
         KUBECONFIG: ./kubeconfig.yaml
 
