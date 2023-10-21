@@ -11,4 +11,4 @@ spec:
     match: PathPrefix(`/api`)
     services:
     - name: backend
-      port: 3001
+      port: 80

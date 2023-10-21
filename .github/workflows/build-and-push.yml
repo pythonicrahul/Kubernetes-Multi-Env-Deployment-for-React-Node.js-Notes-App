@@ -47,7 +47,8 @@ jobs:
       id: extract_branch
 
     - name: Deploy to Kubernetes
-      run: | 
+      run: |
+        kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/common/ 
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/backend/
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/frontend/
       env:

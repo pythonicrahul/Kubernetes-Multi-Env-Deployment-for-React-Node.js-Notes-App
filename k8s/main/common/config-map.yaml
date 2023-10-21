@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map-main
+data:
+  DATABASE_URL: "mongodb://mongodb.default.svc.cluster.local:27017"
+  REACT_APP_API_BASE_URL: "http://172-105-45-221.ip.linodeusercontent.com/api/v1"
