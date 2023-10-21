@@ -41,15 +41,10 @@ jobs:
     - name: Set up kubectl
       run: echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
 
-    - name: Set branch_folder
-      run: |
-        branch_folder="k8s/${{ github.ref }}"
-        branch_folder="${branch_folder#refs/heads/}"  # Remove the "refs/heads/" prefix
-      env:
-        KUBECONFIG: ./kubeconfig.yaml
-
     - name: Deploy to Kubernetes
       run: | 
+        branch_folder="k8s/${{ github.ref }}"
+        branch_folder="${branch_folder#refs/heads/}"  # Remove the "refs/heads/" prefix
         kubectl apply -f $branch_folder/backend
         kubectl apply -f $branch_folder/frontend
       env:
