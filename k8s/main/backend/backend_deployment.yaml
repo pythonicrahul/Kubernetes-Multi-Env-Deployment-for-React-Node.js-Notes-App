@@ -14,12 +14,15 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: pythonicrahul/basic-notes-app-backend:latest
-        env:
-        - name: MONGO_URI
-          value: mongodb://mongodb.default.svc.cluster.local:27017
-        ports:
-        - containerPort: 3001
-        imagePullPolicy: Always
+        - name: backend
+          image: pythonicrahul/basic-notes-app-backend:latest
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-main
+                  key: DATABASE_URL
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
       restartPolicy: Always

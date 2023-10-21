@@ -18,8 +18,11 @@ spec:
         image: pythonicrahul/basic-notes-app-frontend:latest
         env:
         - name: REACT_APP_API_BASE_URL
-          value: http://172-105-45-221.ip.linodeusercontent.com/api/v1
+          valueFrom:
+            configMapKeyRef:
+              name: config-map-main
+              key: REACT_APP_API_BASE_URL
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         imagePullPolicy: Always
       restartPolicy: Always

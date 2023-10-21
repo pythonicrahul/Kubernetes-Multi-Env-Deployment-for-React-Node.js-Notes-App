@@ -11,4 +11,4 @@ spec:
     match: PathPrefix(`/`)
     services:
     - name: frontend
-      port: 3000
+      port: 80
