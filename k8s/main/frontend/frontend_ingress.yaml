@@ -5,10 +5,10 @@ metadata:
   namespace: default
 spec:
   entryPoints:
-  - web
+    - web
   routes:
-  - kind: Rule
-    match: PathPrefix(`/`)
-    services:
-    - name: frontend
-      port: 80
+    - kind: Rule
+      match: Host(`steponedockerregistry.co.in`) && PathPrefix(`/`)
+      services:
+        - name: frontend
+          port: 80

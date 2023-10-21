@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-map-dev
+  namespace: dev
+data:
+  DATABASE_URL: "mongodb://mongodb.dev.svc.cluster.local:27017"
+  REACT_APP_API_BASE_URL: "http://dev.steponedockerregistry.co.in/api/v1"
