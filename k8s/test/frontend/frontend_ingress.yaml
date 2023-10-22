@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: frontend-ingressroute
+  namespace: test
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`app-test.steponedockerregistry.co.in`)
+    services:
+    - name: frontend
+      port: 80
