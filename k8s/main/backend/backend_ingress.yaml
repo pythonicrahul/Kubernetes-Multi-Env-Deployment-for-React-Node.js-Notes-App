@@ -11,6 +11,6 @@ spec:
       match: Host(`api.steponedockerregistry.co.in`)
       services:
         - name: backend
-          port: 80
-      tls:
-        secretName: wildcard-cert
+          port: 80        
+  tls:
+    secretName: wildcard-cert

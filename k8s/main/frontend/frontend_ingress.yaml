@@ -12,5 +12,5 @@ spec:
       services:
         - name: frontend
           port: 80
-      tls:
-        secretName: wildcard-cert
+  tls:
+    secretName: wildcard-cert
