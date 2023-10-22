@@ -34,6 +34,13 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema);
 
+
+app.use((req, res, next) => {
+    console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
+    next(); // Continue processing the request
+});
+  
+
 // Middleware to verify JWT token
 const verifyToken = (req, res, next) => {
     let token = req.header('Authorization');
