@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: pythonicrahul/basic-notes-app-backend:test
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-test
+                  key: DATABASE_URL
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+      restartPolicy: Always
