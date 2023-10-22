@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: pythonicrahul/basic-notes-app-backend:latest
+          image: pythonicrahul/basic-notes-app-backend:dev
           env:
             - name: MONGO_URI
               valueFrom:

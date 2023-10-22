@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: config-map-main
-  namespace: default
+  namespace: main
 data:
-  DATABASE_URL: "mongodb://mongodb.default.svc.cluster.local:27017"
+  DATABASE_URL: "mongodb://mongodb.main.svc.cluster.local:27017"
   REACT_APP_API_BASE_URL: "http://api.steponedockerregistry.co.in/api/v1"

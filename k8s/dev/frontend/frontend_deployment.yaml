@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: pythonicrahul/basic-notes-app-frontend:latest
+        image: pythonicrahul/basic-notes-app-frontend:dev
         env:
         - name: REACT_APP_API_BASE_URL
           valueFrom:

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: default
+  namespace: main
 spec:
   replicas: 2
   selector:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: pythonicrahul/basic-notes-app-frontend:latest
+        image: pythonicrahul/basic-notes-app-frontend:main
         env:
         - name: REACT_APP_API_BASE_URL
           valueFrom:
