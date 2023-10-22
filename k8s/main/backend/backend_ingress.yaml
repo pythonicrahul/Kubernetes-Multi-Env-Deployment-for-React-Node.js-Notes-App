@@ -2,13 +2,13 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: backend-ingressroute
-  namespace: default
+  namespace: main
 spec:
   entryPoints:
     - web
   routes:
     - kind: Rule
-      match: Host(`steponedockerregistry.co.in`) && PathPrefix(`/api`)
+      match: Host(`api.steponedockerregistry.co.in`)
       services:
         - name: backend
           port: 80

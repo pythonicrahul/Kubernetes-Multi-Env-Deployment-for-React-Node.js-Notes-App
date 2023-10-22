@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: default
+  namespace: main
 spec:
   replicas: 2
   selector:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: pythonicrahul/basic-notes-app-backend:latest
+          image: pythonicrahul/basic-notes-app-backend:main
           env:
             - name: MONGO_URI
               valueFrom:

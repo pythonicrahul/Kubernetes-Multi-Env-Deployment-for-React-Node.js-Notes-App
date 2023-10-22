@@ -5,4 +5,4 @@ metadata:
   namespace: dev
 data:
   DATABASE_URL: "mongodb://mongodb.dev.svc.cluster.local:27017"
-  REACT_APP_API_BASE_URL: "http://dev.steponedockerregistry.co.in/api/v1"
+  REACT_APP_API_BASE_URL: "http://api-dev.steponedockerregistry.co.in/api/v1"

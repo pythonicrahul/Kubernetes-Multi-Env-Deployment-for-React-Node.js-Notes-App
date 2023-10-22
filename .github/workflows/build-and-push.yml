@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - dev
-      # Add other branches as needed
 
 jobs:
   build:
@@ -18,17 +17,22 @@ jobs:
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.CONTAINER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
 
+    - name: Extract branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+
     - name: Build and push backend Docker image
       working-directory: backend
       run: |
-        docker build -t ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-backend:latest .
-        docker push ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-backend:latest
+        docker build -t ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-backend:${{steps.extract_branch.outputs.branch}} .
+        docker push ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-backend:${{steps.extract_branch.outputs.branch}}
 
     - name: Build and push frontend Docker image
       working-directory: frontend
       run: |
-        docker build -t ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:latest .
-        docker push ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:latest
+        docker build -t ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:${{steps.extract_branch.outputs.branch}} .
+        docker push ${{ secrets.CONTAINER_REGISTRY_USERNAME }}/basic-notes-app-frontend:${{steps.extract_branch.outputs.branch}}
 
   deploy:
     needs: build
@@ -48,6 +52,8 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
+        kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/common/namespace.yaml
+        kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/database/
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/common/ 
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/backend/
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/frontend/
@@ -55,12 +61,12 @@ jobs:
         KUBECONFIG: ./kubeconfig.yaml
 
     - name: Trigger Rolling Restart of Backend Deployment
-      run: kubectl rollout restart deployment backend
+      run: kubectl rollout restart deployment backend -n ${{steps.extract_branch.outputs.branch}}
       env:
         KUBECONFIG: ./kubeconfig.yaml
-
+  
     - name: Trigger Rolling Restart of Frontend Deployment
-      run: kubectl rollout restart deployment frontend
+      run: kubectl rollout restart deployment frontend -n ${{steps.extract_branch.outputs.branch}}
       env:
         KUBECONFIG: ./kubeconfig.yaml
 
