@@ -8,7 +8,7 @@ spec:
   - web
   routes:
   - kind: Rule
-    match: Host(`dev.steponedockerregistry.co.in`) && PathPrefix(`/api`)
+    match: Host(`api-dev.steponedockerregistry.co.in`)
     services:
     - name: backend
       port: 80

@@ -52,7 +52,12 @@ jobs:
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/database/
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/common/ 
         kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/backend/
-        kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/frontend/
+        kubectl apply -f k8s/${{steps.extract_branch.outputs.branch}}/frontend/        
+        kubectl apply -f k8s/main/database/
+        kubectl apply -f k8s/main/common/ 
+        kubectl apply -f k8s/main/backend/
+        kubectl apply -f k8s/main/frontend/
+
       env:
         KUBECONFIG: ./kubeconfig.yaml
 
