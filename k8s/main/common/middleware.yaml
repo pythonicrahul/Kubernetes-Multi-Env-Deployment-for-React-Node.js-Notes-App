@@ -1,8 +1,0 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: ssl-middleware
-  namespace: main
-spec:
-  tls:
-    secretName: wildcard-ssl-secret
