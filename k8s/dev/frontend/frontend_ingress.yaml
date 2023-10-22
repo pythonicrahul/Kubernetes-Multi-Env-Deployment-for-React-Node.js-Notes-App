@@ -5,10 +5,10 @@ metadata:
   namespace: dev
 spec:
   entryPoints:
-  - web
+    - web
   routes:
-  - kind: Rule
-    match: Host(`app-dev.steponedockerregistry.co.in`)
-    services:
-    - name: frontend
-      port: 80
+    - kind: Rule
+      match: Host(`app-dev.steponedockerregistry.co.in`)
+      services:
+        - name: frontend
+          port: 80
