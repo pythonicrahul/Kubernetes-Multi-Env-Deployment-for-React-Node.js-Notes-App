@@ -1,7 +1,0 @@
-[entryPoints]
-  websecure = {
-    address = ":443"
-    tls = {
-      certificates = ["wildcard-cert"]
-    }
-  }
