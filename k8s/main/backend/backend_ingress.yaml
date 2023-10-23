@@ -8,7 +8,7 @@ spec:
     - web
   routes:
     - kind: Rule
-      match: Host(`api.steponedockerregistry.co.in`)
+      match: Host(`api.heyrahul.cloud`)
       services:
         - name: backend
           port: 80        

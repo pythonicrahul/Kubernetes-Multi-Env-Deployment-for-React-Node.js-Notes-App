@@ -8,7 +8,7 @@ spec:
   - web
   routes:
   - kind: Rule
-    match: Host(`app-test.steponedockerregistry.co.in`)
+    match: Host(`app-test.heyrahul.cloud`)
     services:
     - name: frontend
       port: 80
