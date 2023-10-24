@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: backend-ingressroute
+  namespace: dev1
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`api-dev1.heyrahul.cloud`)
+      services:
+        - name: backend
+          port: 80        
