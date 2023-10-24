@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-map-dev1
-  namespace: dev1
-data:
-  DATABASE_URL: "mongodb://mongodb.dev1.svc.cluster.local:27017"
-  REACT_APP_API_BASE_URL: "http://api-dev1.heyrahul.cloud/api/v1"

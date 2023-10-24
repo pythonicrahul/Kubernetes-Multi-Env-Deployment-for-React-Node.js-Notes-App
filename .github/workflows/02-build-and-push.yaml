@@ -7,6 +7,10 @@ on:
       - dev
       - test
       - dev*
+  workflow_run:
+    workflows: ["01-dynamic-env-setup.yaml"]
+    types:
+      - completed
 
 jobs:
   build:

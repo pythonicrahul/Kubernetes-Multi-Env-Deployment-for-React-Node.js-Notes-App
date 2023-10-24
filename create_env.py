@@ -3,7 +3,17 @@ import shutil
 import re
 
 # Set the environment name from the GitHub workflow environment variable
-environment_name = "dev1" or os.getenv("GITHUB_HEAD_REF")
+full_ref = os.getenv("GITHUB_HEAD_REF")
+if full_ref:
+    branch_match = re.match(r'^refs/heads/(.+)', full_ref)
+    if branch_match:
+        environment_name = branch_match.group(1)
+    else:
+        environment_name = full_ref
+else:
+    print("Environment variable GITHUB_HEAD_REF is not set.")
+    exit(1)
+
 
 # Ensure that the environment name starts with "dev"
 if not environment_name or not environment_name.startswith("dev"):
