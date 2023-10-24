@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: dev1
+spec:
+  selector:
+    app: backend
+  ports:
+  - port: 80
+    targetPort: 3001

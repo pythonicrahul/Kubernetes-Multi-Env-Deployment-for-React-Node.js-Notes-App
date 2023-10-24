@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: frontend-ingressroute
+  namespace: dev1
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`app-dev1.heyrahul.cloud`)
+      services:
+        - name: frontend
+          port: 80
