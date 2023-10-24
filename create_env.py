@@ -1,15 +1,14 @@
 import os
 import sys
 import re
-import subprocess
 
-if len(sys.argv) < 3:
-    print("Usage: python create_env.py <environment_name> <github_token>")
+if len(sys.argv) < 2:
+    print("Usage: python create_env.py <environment_name>")
     exit(1)
-
+    
 environment_name = sys.argv[1]
-github_token = sys.argv[2]
-print(github_token)
+
+
 # Ensure that the environment name starts with "dev"
 if not environment_name or not environment_name.startswith("dev"):
     print("Invalid environment name. It must start with 'dev'.")
@@ -59,17 +58,3 @@ for subdirectory in subdirectories:
                 destination_file.write(yaml_content)
 
 print(f"Created YAML files for the environment: {environment_name}")
-
-
-try:
-    subprocess.run(["git", "config", "--global", "user.email", "rahuljain3109@gmail.com"])
-    subprocess.run(["git", "config", "--global", "user.name", "Pythonicrahul"])
-    subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", f"Update environment to {environment_name}"])
-    subprocess.run(["git", "push", f"https://{github_token}@github.com/pythonicrahul/React-and-NodeJS-Notes-App.git"])
-    print("Committed and pushed changes to the repository.")
-except Exception as e:
-    print(f"An error occurred while committing and pushing changes: {str(e)}")
-
-
-print("rahul", github_token)
