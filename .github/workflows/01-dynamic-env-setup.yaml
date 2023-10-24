@@ -39,4 +39,4 @@ jobs:
           # Add, commit, and push the changes using the Git token
           git add .
           git commit -m "Auto-commit: Update environment files for ${{ github.ref }}"
-          git push https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} -u $GIT_TOKEN
+          git push
