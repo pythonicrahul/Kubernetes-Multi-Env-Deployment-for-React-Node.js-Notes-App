@@ -9,7 +9,7 @@ if len(sys.argv) < 3:
 
 environment_name = sys.argv[1]
 github_token = sys.argv[2]
-
+print(github_token)
 # Ensure that the environment name starts with "dev"
 if not environment_name or not environment_name.startswith("dev"):
     print("Invalid environment name. It must start with 'dev'.")
