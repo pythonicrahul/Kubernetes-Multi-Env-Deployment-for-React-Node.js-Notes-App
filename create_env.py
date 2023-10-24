@@ -58,3 +58,4 @@ for subdirectory in subdirectories:
                 destination_file.write(yaml_content)
 
 print(f"Created YAML files for the environment: {environment_name}")
+
