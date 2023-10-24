@@ -31,13 +31,10 @@ jobs:
           # Set the user name and email to avoid conflicts
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-
-          # Set the Git token from the secret
-          export GIT_TOKEN="${{ secrets.PAT_TOKEN }}"
-          
+      
           # Authenticate with the token
-          git remote set-url origin "https://$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
-          
+          git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
+      
           # Add, commit, and push the changes using the Git token
           git checkout ${{ steps.extract_branch.outputs.branch }}
           git add .
