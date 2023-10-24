@@ -19,9 +19,8 @@ jobs:
           python-version: '3.x'
 
       - name: Execute Python script
-        run: python create_env.py
-        env:
-          GITHUB_HEAD_REF: ${{ github.head_ref }}
+        run: python create_env.py ${{ github.head_ref }}
+        
 
       - name: Commit and Push Changes
         run: |

@@ -1,9 +1,13 @@
 import os
-import shutil
+import sys
 import re
 
+if len(sys.argv) < 2:
+    print("Usage: python create_env.py <environment_name>")
+    exit(1)
+
 # Set the environment name from the GitHub workflow environment variable
-full_ref = os.getenv("GITHUB_HEAD_REF")
+full_ref = sys.argv[1]
 if full_ref:
     branch_match = re.match(r'^refs/heads/(.+)', full_ref)
     if branch_match:
