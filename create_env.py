@@ -62,6 +62,8 @@ print(f"Created YAML files for the environment: {environment_name}")
 
 
 try:
+    subprocess.run(["git", "config", "--global", "user.email", "rahuljain3109@gmail.com"])
+    subprocess.run(["git", "config", "--global", "user.name", "Pythonicrahul"])
     subprocess.run(["git", "add", "."])
     subprocess.run(["git", "commit", "-m", f"Update environment to {environment_name}"])
     subprocess.run(["git", "push", f"https://{github_token}@github.com/pythonicrahul/React-and-NodeJS-Notes-App.git"])
