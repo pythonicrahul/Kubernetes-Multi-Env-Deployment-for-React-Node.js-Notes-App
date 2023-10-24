@@ -17,8 +17,14 @@ jobs:
         run: |
           # Replace with the latest version if needed
           GH_VERSION="1.16.0"
-          curl -sSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz" | sudo tar xz --strip-components 2 -C /usr/local/bin/ gh
+          curl -sSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz" -O
+
+          # Extract the binary
+          sudo tar -xvf gh_${GH_VERSION}_linux_amd64.tar.gz -C /usr/local/bin/
+
+          # Verify that the installation was successful
           gh --version
+
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
