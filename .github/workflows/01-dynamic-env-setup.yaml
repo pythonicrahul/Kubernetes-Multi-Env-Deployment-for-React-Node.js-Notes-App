@@ -39,7 +39,7 @@ jobs:
           git remote set-url origin "https://$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
           
           # Add, commit, and push the changes using the Git token
-          git checkout ${{ steps.extract_branch.outputs.branch }}s
+          git checkout ${{ steps.extract_branch.outputs.branch }}
           git add .
           git commit -m "Auto-commit: Update environment files for ${{ github.ref }}"
           git push
