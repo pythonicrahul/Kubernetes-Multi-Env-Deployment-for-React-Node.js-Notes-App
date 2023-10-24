@@ -8,6 +8,8 @@ on:
 jobs:
   setup-environment:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_HEAD_REF: ${{ github.head_ref }}
 
     steps:
       - name: Check out code
