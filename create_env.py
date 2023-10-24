@@ -14,7 +14,6 @@ else:
     print("Environment variable GITHUB_HEAD_REF is not set.")
     exit(1)
 
-
 # Ensure that the environment name starts with "dev"
 if not environment_name or not environment_name.startswith("dev"):
     print("Invalid environment name. It must start with 'dev'.")

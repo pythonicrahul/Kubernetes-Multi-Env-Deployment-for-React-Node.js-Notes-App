@@ -20,7 +20,7 @@ jobs:
           curl -sSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz" -O
 
           # Extract the binary
-          sudo tar -xvf gh_${GH_VERSION}_linux_amd64.tar.gz -C /usr/local/bin/
+          sudo tar -xf gh_${GH_VERSION}_linux_amd64.tar.gz -C /usr/local/bin/
 
           # Verify that the installation was successful
           gh --version
