@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - name: Check out code
         uses: actions/checkout@v2
 
@@ -26,15 +30,7 @@ jobs:
       - name: Execute Python script
         run: python create_env.py ${{ steps.extract_branch.outputs.branch }}
 
-      - name: Commit and Push Changes
-        run: |
-          git config --local user.email "rahuljain3109@gmail.com"
-          git config --local user.name "pythonicrahul"
-      
-          git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
-      
-          # Add, commit, and push the changes using the Git token
-          git checkout ${{ steps.extract_branch.outputs.branch }}
-          git add .
-          git commit -m "Auto-commit: Update environment files for ${{ github.ref }}"
-          git push
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
