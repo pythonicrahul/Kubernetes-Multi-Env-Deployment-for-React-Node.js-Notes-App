@@ -25,7 +25,6 @@ jobs:
 
       - name: Execute Python script
         run: python create_env.py ${{steps.extract_branch.outputs.branch}}
-        
 
       - name: Commit and Push Changes
         run: |
@@ -33,12 +32,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git config --local credential.helper cache
-          
+
           # Set the Git token from the secret
           export GIT_TOKEN=${{ secrets.PAT_TOKEN }}
-          
+
           # Add, commit, and push the changes using the Git token
           git add .
           git commit -m "Auto-commit: Update environment files for ${{ github.ref }}"
           git push https://github.com/${{ github.repository }}.git HEAD:${{ github.ref }} -u $GIT_TOKEN
-      
