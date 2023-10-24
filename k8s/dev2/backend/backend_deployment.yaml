@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: dev2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: pythonicrahul/basic-notes-app-backend:dev2
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: config-map-dev2
+                  key: DATABASE_URL
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+      restartPolicy: Always

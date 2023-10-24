@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: dev2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: pythonicrahul/basic-notes-app-frontend:dev2
+        env:
+        - name: REACT_APP_API_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: config-map-dev2
+              key: REACT_APP_API_BASE_URL
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+      restartPolicy: Always
