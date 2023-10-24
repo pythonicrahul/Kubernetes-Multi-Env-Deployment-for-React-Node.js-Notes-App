@@ -13,21 +13,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Install GitHub CLI (gh)
-        run: |
-          # Replace with the latest version if needed
-          GH_VERSION="1.16.0"
-          curl -sSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz" -O
-
-          # Extract the binary
-          sudo tar -xf gh_${GH_VERSION}_linux_amd64.tar.gz -C /usr/local/bin/
-
-          # Verify that the installation was successful
-          gh --version
-
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
