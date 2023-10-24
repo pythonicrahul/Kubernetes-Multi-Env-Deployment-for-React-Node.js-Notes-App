@@ -5,18 +5,8 @@ import re
 if len(sys.argv) < 2:
     print("Usage: python create_env.py <environment_name>")
     exit(1)
-
-# Set the environment name from the GitHub workflow environment variable
-full_ref = sys.argv[1]
-if full_ref:
-    branch_match = re.match(r'^refs/heads/(.+)', full_ref)
-    if branch_match:
-        environment_name = branch_match.group(1)
-    else:
-        environment_name = full_ref
-else:
-    print("Environment variable GITHUB_HEAD_REF is not set.")
-    exit(1)
+    
+environment_name = sys.argv[1]
 
 # Ensure that the environment name starts with "dev"
 if not environment_name or not environment_name.startswith("dev"):
