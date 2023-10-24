@@ -28,11 +28,9 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          # Set the user name and email to avoid conflicts
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "rahuljain3109@gmail.com"
+          git config --local user.name "pythonicrahul"
       
-          # Authenticate with the token
           git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
       
           # Add, commit, and push the changes using the Git token
