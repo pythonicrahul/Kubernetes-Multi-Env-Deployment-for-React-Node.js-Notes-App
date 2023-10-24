@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
-        with:
-          persist-credentials: true # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
       - name: Check out code
         uses: actions/checkout@v2
 
@@ -27,10 +23,7 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - name: Execute Python script
-        run: python create_env.py ${{ steps.extract_branch.outputs.branch }}
-
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Execute Python script with PAT
+        env:
+          GH_PAT: ${{ secrets.PAT_TOKEN }}
+        run: python create_env.py ${{ steps.extract_branch.outputs.branch }} "$GH_PAT"
