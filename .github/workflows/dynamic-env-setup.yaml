@@ -1,0 +1,38 @@
+name: Dynamic Environment Setup
+
+on:
+  push:
+    branches:
+      - 'dev*'
+
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Install GitHub CLI (gh)
+      run: |
+        GH_VERSION="1.16.0"  # Replace with the latest version if needed
+        curl -sSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz" | sudo tar xz --strip-components 2 -C /usr/local/bin/ gh
+        gh --version
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Execute Python script
+      run: python create_env.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Auto-commit: Update environment files for ${{ github.ref }}"
+        git push
